@@ -33,7 +33,8 @@ public class Vstarcam extends CordovaPlugin implements IpcamClientInterface,
 	public boolean execute(String action, CordovaArgs args,
 			CallbackContext callbackContext) throws JSONException {
 		callbackContext.success(200);
-		webView.loadUrl("javascript:console.log('execute: " + action + "');");
+		Log.e("vstar", "execute: " + action);
+		//webView.loadUrl("javascript:console.log('execute: " + action + "');");
 
 		if (action.equals("videostream")) {
 			return videostream(args, callbackContext);
