@@ -54,7 +54,5 @@
         <source-file src="src/android/libffmpeg.so" target-dir="libs/armeabi-v7a" />
         <source-file src="src/android/libvstc2_jni.so" target-dir="libs/armeabi-v7a" />
         <source-file src="src/android/android-support-v4.jar" target-dir="libs" />
-
-        <framework src="com.android.support:support-v4:24.1.1+" />
       </platform>
 </plugin>
