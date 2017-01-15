@@ -34,24 +34,30 @@ public class Vstarcam extends CordovaPlugin implements IpcamClientInterface, Pla
 			usr = args.getString(1);
 			pwd = args.getString(2);
 			vsCallback = callbackContext;
+			
+			callbackContext.success(100);
+			webView.loadUrl("javascript:console.log('cid,usr,pwd:" + cid + "," + usr + "," + pwd + "');");
 		}catch (JSONException e) {
-            Log.e("VSTARCAM", e.getMessage());
             return false;
         }
 		
+		webView.loadUrl("javascript:console.log('starting service');");
 		// 启动回调service
 		Intent intent = new Intent();
 		intent.setClass(webView.getContext(), BridgeService.class);
 		webView.getContext().startService(intent);
-		
+		webView.loadUrl("javascript:console.log('started service');");
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				try {
+					webView.loadUrl("javascript:console.log('initing native');");
 					NativeCaller.PPPPInitialOther("ADCBBFAOPPJAHGJGBBGLFLAGDBJJHNJGGMBFBKHIBBNKOKLDHOBHCBOEHOKJJJKJBPMFLGCPPJMJAPDOIPNL");
 					Thread.sleep(3000);
+					webView.loadUrl("javascript:console.log('sending message');");
 					Message msg = new Message();
 					mHandler.sendMessage(msg);
+					webView.loadUrl("javascript:console.log('sent message');");
 				} catch (Exception e) {
 
 				}
@@ -63,15 +69,18 @@ public class Vstarcam extends CordovaPlugin implements IpcamClientInterface, Pla
 	private Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			// 3.设定连接摄像头的回调
+			webView.loadUrl("javascript:console.log('get message');");
 			BridgeService.setIpcamClientInterface(Vstarcam.this);
 			
 			// 4.初始化NativeCaller
 			NativeCaller.Init();
+			webView.loadUrl("javascript:console.log('inited native');");
 			
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
 					// 5.发送摄像头连接请求
+					webView.loadUrl("javascript:console.log('starting pppp:" + cid + "');");
 					NativeCaller.StartPPPP(cid, usr, pwd, 1, "");
 				}
 			}).start();
@@ -80,6 +89,7 @@ public class Vstarcam extends CordovaPlugin implements IpcamClientInterface, Pla
 	
 	private Handler PPPPMsgHandler = new Handler() {
 		public void handleMessage(Message msg) {
+			webView.loadUrl("javascript:console.log('got message pppp');");
 			Bundle bd = msg.getData();
 			int msgParam = bd.getInt("a");
 			int msgType = msg.what;
@@ -98,9 +108,11 @@ public class Vstarcam extends CordovaPlugin implements IpcamClientInterface, Pla
 				case ContentCommon.PPPP_STATUS_INVALID_ID://5
 					break;
 				case ContentCommon.PPPP_STATUS_ON_LINE://2 在线状态
+					webView.loadUrl("javascript:console.log('online status');");
 					// 7.连接摄像头在线，即可以对摄像头进行操作，设定打开摄像头视频回调
 					BridgeService.setPlayInterface(Vstarcam.this);
 					// 8.发送打开摄像头视频请求
+					webView.loadUrl("javascript:console.log('starting live stream');");
 					NativeCaller.StartPPPPLivestream(cid, 10, 1);
 					break;
 				case ContentCommon.PPPP_STATUS_DEVICE_NOT_ON_LINE://6
@@ -130,7 +142,6 @@ public class Vstarcam extends CordovaPlugin implements IpcamClientInterface, Pla
 	@Override
 	public void BSMsgNotifyData(String did, int type, int param) {
 		// 6.摄像头连接结果
-		Log.d("ip", "type:" + type + " param:" + param);
 		Bundle bd = new Bundle();
 		Message msg = PPPPMsgHandler.obtainMessage();
 		msg.what = type;
@@ -159,11 +170,12 @@ public class Vstarcam extends CordovaPlugin implements IpcamClientInterface, Pla
 	public void callBackVideoData(byte[] videobuf, int h264Data, int len,
 			int width, int height) {
 		// 9.摄像头视频数据，在这儿可以对返回的h264Data进行解析，然后显示到画面上了
-		Log.e("weim", "----4");
-		Log.e("weim", "len"+len);
-		Log.e("weim", "width"+width+"height"+height);
-		Log.e("weim", "videobuf:"+videobuf);
-		//Log.e("weim", "h264Data"+h264Data);
+//		Log.e("weim", "----4");
+//		Log.e("weim", "len"+len);
+//		Log.e("weim", "width"+width+"height"+height);
+//		Log.e("weim", "videobuf:"+videobuf);
+//		Log.e("weim", "h264Data"+h264Data);
+		webView.loadUrl("javascript:console.log('callback video:" + len + "');");
 		vsCallback.success(len);
 	}
 
