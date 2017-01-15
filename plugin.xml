@@ -48,7 +48,7 @@
         <source-file src="src/android/BridgeService.java" target-dir="src/com/icloris/vstarcam" />
         <source-file src="src/android/ContentCommon.java" target-dir="src/com/icloris/vstarcam" />
         <source-file src="src/android/Vstarcam.java" target-dir="src/com/icloris/vstarcam" />
-        <source-file src="src/android/NativeCaller.java" target-dir="src/vstc2.nativecaller" />
+        <source-file src="src/android/NativeCaller.java" target-dir="src/vstc2/nativecaller" />
         <source-file src="src/android/libffmpeg.so" target-dir="libs/armeabi" />
         <source-file src="src/android/libvstc2_jni.so" target-dir="libs/armeabi" />
         <source-file src="src/android/libffmpeg.so" target-dir="libs/armeabi-v7a" />
