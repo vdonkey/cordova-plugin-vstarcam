@@ -10,8 +10,6 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.icloris.vstarcam.R;
-
 public class BridgeService extends Service
 {
 	private String TAG = BridgeService.class.getSimpleName();
