@@ -1,0 +1,36 @@
+{
+  "name": "cordova-plugin-vstarcam",
+  "version": "1.0.0",
+  "description": "A cordova plugin for VSTARCAM camera",
+  "cordova": {
+    "id": "cordova-plugin-vstarcam",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vdonkey/cordova-plugin-vstarcam.git"
+  },
+  "keywords": [
+    "cordova",
+    "camera",
+    "vstarcam",
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.5.0"
+    }
+  ],
+  "author": "Humphrey.He <hehf@icloris.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vdonkey/cordova-plugin-vstarcam/issues"
+  },
+  "homepage": "https://github.com/vdonkey/cordova-plugin-vstarcam#readme"
+}
+
