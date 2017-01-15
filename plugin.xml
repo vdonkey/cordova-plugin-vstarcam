@@ -30,7 +30,7 @@
     <repo>https://github.com/vdonkey/cordova-plugin-vstarcam.git</repo>
     <issue>https://github.com/vdonkey/cordova-plugin-vstarcam/issues</issue>
 
-    <js-module src="www/vstarcam.js" name="camera">
+    <js-module src="www/vstarcam.js" name="Vstarcam">
         <clobbers target="Vstarcam" />
     </js-module>
 
